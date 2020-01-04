@@ -8,6 +8,7 @@
 // output values, step information.
 // See documetation for more details.
 
+var FileSaver = require('file-saver');
 const intermediateHtmlStepUi = require('./intermediateHtmlStepUi.js'),
   urlHash = require('./urlHash.js'),
   _ = require('lodash'),
@@ -309,14 +310,14 @@ function DefaultHtmlStepUi(_sequencer, options) {
     }
 
     $stepAll('.download-btn').on('click', () => {
-
+      
       var element = document.createElement('a');
       element.setAttribute('href', step.output);
       element.setAttribute('download', step.name + '.' + fileExtension(step.imgElement.src));
       element.style.display = 'none';
       document.body.appendChild(element);
+      FileSaver.saveAs(step.output, step.name + '.' + fileExtension(step.imgElement.src));
       
-      element.click();
     });
 
     // Fill inputs with stored step options
