@@ -31,13 +31,13 @@ window.onload = function () {
   };
 
   versionManagement.getLatestVersionNumber(function(versionNumber) {
-    console.log("The latest NPM version number for Image Sequencer (from GitHub) is v" + versionNumber);
+    console.log('The latest NPM version number for Image Sequencer (from GitHub) is v' + versionNumber);
   });
-  console.log("The local version number for Image Sequencer is v" + versionManagement.getLocalVersionNumber());
+  console.log('The local version number for Image Sequencer is v' + versionManagement.getLocalVersionNumber());
 
   function displayVersionNumber() {
-    $('#version-number-text').text("Image Sequencer v" + versionManagement.getLocalVersionNumber());
-    $('#version-number-top-right').text("v" + versionManagement.getLocalVersionNumber());
+    $('#version-number-text').text('Image Sequencer v' + versionManagement.getLocalVersionNumber());
+    $('#version-number-top-right').text('v' + versionManagement.getLocalVersionNumber());
   }
   displayVersionNumber();
 
@@ -336,6 +336,7 @@ window.onload = function () {
       else
         step.imgElement.src = url;
       insertPreview.updatePreviews(url, document.querySelector('#addStep'));
+      DefaultHtmlStepUi(sequencer).updateDimensions(step);
     }
   });
 
