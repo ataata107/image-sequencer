@@ -8,7 +8,6 @@
 // output values, step information.
 // See documetation for more details.
 
-var FileSaver = require('file-saver');
 const intermediateHtmlStepUi = require('./intermediateHtmlStepUi.js'),
   urlHash = require('./urlHash.js'),
   _ = require('lodash'),
@@ -310,14 +309,26 @@ function DefaultHtmlStepUi(_sequencer, options) {
     }
 
     $stepAll('.download-btn').on('click', () => {
+
+      function dataURLtoBlob(dataurl) {
+        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], {type:mime});
+      }
       
       var element = document.createElement('a');
-      element.setAttribute('href', step.output);
+      
       element.setAttribute('download', step.name + '.' + fileExtension(step.imgElement.src));
       element.style.display = 'none';
       document.body.appendChild(element);
-      FileSaver.saveAs(step.output, step.name + '.' + fileExtension(step.imgElement.src));
+      var blob = dataURLtoBlob(step.output);
+      var objurl = URL.createObjectURL(blob);
+      element.setAttribute('href', objurl);
       
+      element.click();
     });
 
     // Fill inputs with stored step options
