@@ -6,6 +6,22 @@
       "type": "string",
       "desc": "Percentage value of the resize",
       "default": "125%"
+    },
+    "aspect": {
+      "type": "select",
+      "desc": "Maintain aspect ratio",
+      "default": "yes",
+      "values": ["yes","no"]
+    },
+    "width": {
+      "type": "string",
+      "desc": "New width",
+      "default": "200"
+    },
+    "height": {
+      "type": "string",
+      "desc": "New Height",
+      "default": "200"
     }
   },
   "docs-link":"https://github.com/publiclab/image-sequencer/blob/main/docs/MODULES.md#resize-module"

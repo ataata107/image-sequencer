@@ -12,6 +12,9 @@ module.exports = function Resize(options, UI) {
 
     const defaults = require('./../../util/getDefaults.js')(require('./info.json'));
     options.resize = options.resize || defaults.resize;
+    options.aspect = options.aspect || defaults.aspect;
+    options.width = options.width || defaults.width;
+    options.height = options.height || defaults.height;
 
     progressObj.stop(true);
     progressObj.overrideFlag = true;
@@ -25,8 +28,13 @@ module.exports = function Resize(options, UI) {
       if (resize_value == 100) return pixels;
 
 
-      const new_width = Math.round(pixels.shape[0] * (resize_value / 100)),
+      var new_width = Math.round(pixels.shape[0] * (resize_value / 100)),
         new_height = Math.round(pixels.shape[1] * (resize_value / 100));
+      
+      if(options.aspect == 'no'){
+        new_width = options.width;
+        new_height = options.height;
+      }
 
       const bitmap = new imagejs.Bitmap({ width: pixels.shape[0], height: pixels.shape[1] });
       
